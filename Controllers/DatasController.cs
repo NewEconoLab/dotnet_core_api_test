@@ -17,7 +17,7 @@ namespace dotnet_core_api_test.Controllers
         {
             mongoHelper mh = new mongoHelper();
             long blockCount = (long)(mh.GetData(mh.mongodbConnStr_testnet,mh.mongodbDatabase_testnet, "system_counter", "{counter:'block'}")[0]["lastBlockindex"]) + 1;
-            return new string[] { "data1", "data2",blockCount.ToString() };
+            return new string[] {System.IO.Directory.GetCurrentDirectory().ToString(), "data1", "data2",blockCount.ToString() };
         }
 
         // GET api/values/5
