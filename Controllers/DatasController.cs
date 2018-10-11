@@ -15,9 +15,16 @@ namespace dotnet_core_api_test.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            mongoHelper mh = new mongoHelper();
-            long blockCount = (long)(mh.GetData(mh.mongodbConnStr_testnet,mh.mongodbDatabase_testnet, "system_counter", "{counter:'block'}")[0]["lastBlockindex"]) + 1;
-            return new string[] {System.IO.Directory.GetCurrentDirectory().ToString(), "data1", "data2",blockCount.ToString() };
+            try{
+                mongoHelper mh = new mongoHelper();
+                long blockCount = (long)(mh.GetData(mh.mongodbConnStr_testnet,mh.mongodbDatabase_testnet, "system_counter", "{counter:'block'}")[0]["lastBlockindex"]) + 1;
+                return new string[] {System.IO.Directory.GetCurrentDirectory().ToString(), "data1", "data2",blockCount.ToString() };
+            }
+            catch(Exception ex)
+            {
+                return new string[] { ex.Message };
+            }
+
         }
 
         // GET api/values/5
